@@ -3,10 +3,10 @@ class Gameover extends MovableObject{
     width = 720;
     x;
     y;
-    game_over = 'img/9.Intro _ Outro Image/_Game over_ screen/3.Game over.png';
-   
+    game_over = 'img/9.Intro _ Outro Image/_Game over_ screen/2.oh no you lost!.png';
+  
     constructor(){
-        super().loadImage('img/9.Intro _ Outro Image/_Game over_ screen/3.Game over.png');
+        super().loadImage(this.game_over);
         this.height;
         this.width;
         this.x = 0;

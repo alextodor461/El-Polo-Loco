@@ -18,6 +18,7 @@ class World{
     hit_chicken = new Audio('audio/pepe-hurt.mp3');
     hit_chicken_with_bottle = new Audio('audio/chicken.mp3');
     game_over = new Gameover();
+    you_won = new WonGame();
     dead_chicken = "img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png";
 
     constructor(canvas, keyboard){
@@ -45,6 +46,7 @@ class World{
             if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
                 this.character.hit();   
                 this.hit_chicken.play();
+                this.statusbarcoin.setPercent(this.character.coinAmount -= 5);
                 this.statusbar.setPercent(this.character.energy); 
             }
          })
@@ -55,6 +57,7 @@ class World{
             if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
                 this.character.hit();   
                 this.hit_chicken.play();
+                this.statusbarcoin.setPercent(this.character.coinAmount -= 5);
                 this.statusbar.setPercent(this.character.energy); 
             }
          })
@@ -88,13 +91,11 @@ class World{
   
     //auf diese funktion will ich im chicken class drauf greifen
     checkcollisionWithEnemy(){
-         this.throwBottle.forEach((bottle) =>{
-                 if(this.endboss.isColliding(bottle)) {
-                    this.endboss.hit();
-                    this.hit_chicken_with_bottle.play(); 
-                    console.log('enemy hit');   
+        this.throwBottle.forEach((bottle) =>{   
+            if(this.endboss.isColliding(bottle)) {
+                console.log('enemy hit'); 
             }
-           })    
+        })
     }
 
     checkThrowableobject(){
@@ -103,6 +104,8 @@ class World{
             let bottles = new Throwableobject(this.character.x, this.character.y);
             this.throwBottle.push(bottles);          
             this.statusbarbottle.setPercent(this.character.bottleAmount -= 10);
+        }else if(this.throwBottle.y == 720){
+            this.throwBottle =[];
         }
     }
 
@@ -132,10 +135,13 @@ class World{
         this.addToMap(this.statusbarcoin);
         this.addToMap(this.statusbarbottle);
         this.addToMap(this.statusbarboss);
-        
-
+       
         if(this.character.isDead()){
             this.addToMap(this.game_over);
+        }
+
+        if(this.endboss.isDead()){
+            this.addToMap(this.you_won);
         }
         
         //Draw wird immer wieder aufgerufen und zeigt jede veränderung z.b wenn sich die objekte bewegen

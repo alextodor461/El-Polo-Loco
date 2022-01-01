@@ -47,7 +47,7 @@ class MovableObject extends Drawableobject{
     moveRight(){
        setInterval(() => {
         if(this.world.keyboard.right){
-           this.x += this.speed + 0.50;
+           this.x += this.speed + 0.90;
            this.otherDirection = false;
         }
         }, 1000 / 120);
@@ -56,7 +56,7 @@ class MovableObject extends Drawableobject{
     moveLeftPepe(){
         setInterval(() => {
          if(this.world.keyboard.left){
-            this.x -= this.speed + 0.50;
+            this.x -= this.speed + 0.90;
             this.otherDirection = true;
          }
          }, 1000 / 120);

@@ -83,8 +83,6 @@ class Character extends MovableObject{
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);     
                 this.fall();
-                this.world.keyboard.left = false;
-                this.world.keyboard.right = false;
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);              
             }else if(this.isAboveGround()){

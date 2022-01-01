@@ -38,7 +38,7 @@ class World{
             this.checkThrowableobject();
             this.checkcollisionWithEnemy();
             this.checkcollisionWithBoss();
-        }, 100);       
+        }, 10);       
     }
 
     checkcollision(){
@@ -55,7 +55,7 @@ class World{
     checkcollisionWithBoss(){
         this.level.endboss.forEach((enemy) =>{
             if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
-                this.character.hit();   
+                this.character.hitByBoss();   
                 this.hit_chicken.play();
                 this.statusbarcoin.setPercent(this.character.coinAmount -= 5);
                 this.statusbar.setPercent(this.character.energy); 

@@ -91,6 +91,15 @@ class MovableObject extends Drawableobject{
         }
     }
 
+    hitByBoss(){
+        this.energy -= 20;
+        if(this.energy < 0){
+            this.energy = 0;
+        }else{
+            this.lasthit = new Date().getTime();
+        }
+    }
+
     hitCoin(){
         this.coinAmount += 5;
         if(this.coinAmount > 100){

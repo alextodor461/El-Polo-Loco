@@ -18,12 +18,19 @@ class Endboss extends MovableObject{
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/3.Herida/G21.png',
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/3.Herida/G22.png',
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/3.Herida/G23.png',
-    ]
+    ];
+
+    IMAGES_DEAD = [
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G24.png',
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G25.png',
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G26.png',
+    ];
 
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]); //DAS ERSTE BILD ALSO AND DER STELLE 0
         this.loadImages(this.IMAGES_WALKING); //DIE FUNKTION AUS DER WORLD.JS DATEI WIRD HIER GELADEN MIT DEN BILDERN
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 3600;
         this.animateBoss();
     }
@@ -31,9 +38,11 @@ class Endboss extends MovableObject{
     animateBoss(){
         setInterval(() => {
             if(this.isDead()){
-                console.log('endboss is dead')  
+                this.playAnimation(this.IMAGES_DEAD);
+                console.log('endboss is dead'); 
             }else if(this.isHurt()){
-                this.playAnimation(this.IMAGES_HURT);              
+                this.playAnimation(this.IMAGES_HURT); 
+                console.log('ENEMY HIIIITTTT');             
             }
         },100);   
 

@@ -32,7 +32,7 @@ class Throwableobject extends MovableObject{
         }, 75);
 
         setInterval(() =>{
-            this.x += 15;
+            this.x += 12.5;
         }, 25)
     }
 }

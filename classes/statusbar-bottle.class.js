@@ -5,7 +5,7 @@ class StatusbarBottle extends Drawableobject{
     width = 100;
     world;
 
-    percent = 0;
+    percent = 100;
 
     IMAGES_BOTTLE = [
         'img/7.Marcadores/Barra/Marcador_botella/Azul/100_.png',
@@ -20,7 +20,6 @@ class StatusbarBottle extends Drawableobject{
         super();
         this.loadImages(this.IMAGES_BOTTLE); //DAS ERSTE BILD ALSO AND DER STELLE 0
         this.setPercent(0);
-       
         this.x = 10;
         this.y = 80;
         this.width = 180;

@@ -25,7 +25,6 @@ function restartGame(){
     cancelAnimationFrame(animationFrame);
 }
 
-
 function startGame(){
     document.getElementById('startGameDiv').classList.add('d-none');
     

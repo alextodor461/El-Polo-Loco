@@ -13,7 +13,7 @@ class Drawableobject{
 
     //Triangle of the objects
     drawFrame(ctx){
-        if(this instanceof Chicken || this instanceof Bottle || this instanceof Throwableobject || this instanceof Endboss){ //Checkt ob es ein chicken oder charakter ist und wendet es nur bei denen an
+        if(!this instanceof Chicken){ //Checkt ob es ein chicken oder charakter ist und wendet es nur bei denen an
         ctx.beginPath();
         ctx.lineWidth = '4';
         ctx.strokeStyle = 'blue';

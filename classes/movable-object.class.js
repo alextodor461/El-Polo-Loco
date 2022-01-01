@@ -93,10 +93,16 @@ class MovableObject extends Drawableobject{
 
     hitCoin(){
         this.coinAmount += 5;
+        if(this.coinAmount > 100){
+            this.coinAmount = 100;
+        }
     }
 
     hitBottle(){
         this.bottleAmount += 10;
+        if(this.bottleAmount > 100){
+            this.bottleAmount = 100;
+        }
     }
 
     isDead(){

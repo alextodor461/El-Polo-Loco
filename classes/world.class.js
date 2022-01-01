@@ -35,11 +35,9 @@ class World{
             this.checkcollisionWithCoin();
             this.checkcollisionWithBottle();        
             this.checkThrowableobject();
-        }, 100);    
-
-        setInterval(() => { 
             this.checkcollisionWithEnemy();
-        }, 10);    
+            this.checkcollisionWithBoss();
+        }, 100);       
     }
 
     checkcollision(){
@@ -52,9 +50,20 @@ class World{
          })
     }
 
+    checkcollisionWithBoss(){
+        this.level.endboss.forEach((enemy) =>{
+            if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
+                this.character.hit();   
+                this.hit_chicken.play();
+                this.statusbar.setPercent(this.character.energy); 
+            }
+         })
+    }
+
     checkcollisionWithCoin(){    
         this.level.coin.forEach((coins) =>{
             if(this.character.isColliding(coins)) {
+                console.log(this.character.coinAmount);
                 this.character.hitCoin(); 
                 this.collect_coin.play();                
                 this.statusbarcoin.setPercent(this.character.coinAmount); 
@@ -67,6 +76,7 @@ class World{
     checkcollisionWithBottle(){
         this.level.bottle.forEach((bottles) =>{
             if(this.character.isColliding(bottles)) {
+                console.log(this.character.bottleAmount);
                 this.character.hitBottle();   
                 this.collect_bottle.play();     
                 this.statusbarbottle.setPercent(this.character.bottleAmount); 
@@ -78,23 +88,22 @@ class World{
   
     //auf diese funktion will ich im chicken class drauf greifen
     checkcollisionWithEnemy(){
-        this.level.endboss.forEach((boss) =>{
-            this.throwBottle.forEach((bottles) =>{
-                 if(bottles.isColliding(boss)) {
+         this.throwBottle.forEach((bottle) =>{
+                 if(this.endboss.isColliding(bottle)) {
                     this.endboss.hit();
-                    this.hit_chicken_with_bottle.play();    
+                    this.hit_chicken_with_bottle.play(); 
+                    console.log('enemy hit');   
             }
            })    
-         })
     }
 
     checkThrowableobject(){
-        if(this.keyboard.space && (new Date().getTime() - this.character.lastthrow > 500)){
+        if(this.keyboard.space && (new Date().getTime() - this.character.lastthrow > 500)  && this.character.bottleAmount > 0 ){
             this.character.lastthrow = new Date().getTime();
             let bottles = new Throwableobject(this.character.x, this.character.y);
-            this.throwBottle.push(bottles);     
+            this.throwBottle.push(bottles);          
+            this.statusbarbottle.setPercent(this.character.bottleAmount -= 10);
         }
-        
     }
 
     setWorld(){

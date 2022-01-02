@@ -33,11 +33,12 @@ class World{
     run(){
         setInterval(() => { 
             this.checkcollision();
+            this.checkThrowableobject();
             this.checkcollisionWithCoin();
             this.checkcollisionWithBottle();        
-            this.checkThrowableobject();
+            
             this.checkcollisionWithEnemy();
-            this.checkcollisionWithBoss();
+           
         }, 10);       
     }
 
@@ -46,18 +47,7 @@ class World{
             if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
                 this.character.hit();   
                 this.hit_chicken.play();
-                this.statusbarcoin.setPercent(this.character.coinAmount -= 5);
-                this.statusbar.setPercent(this.character.energy); 
-            }
-         })
-    }
-
-    checkcollisionWithBoss(){
-        this.level.endboss.forEach((enemy) =>{
-            if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
-                this.character.hitByBoss();   
-                this.hit_chicken.play();
-                this.statusbarcoin.setPercent(this.character.coinAmount -= 5);
+                this.statusbarcoin.setPercent(this.character.coinAmount -= 10);
                 this.statusbar.setPercent(this.character.energy); 
             }
          })
@@ -88,25 +78,33 @@ class World{
             }
          })
     }
-  
+ 
     //auf diese funktion will ich im chicken class drauf greifen
     checkcollisionWithEnemy(){
-        this.throwBottle.forEach((bottle) =>{   
-            if(this.endboss.isColliding(bottle)) {
-                console.log('enemy hit'); 
-            }
+        this.level.enemies.forEach((enemy) =>{  
+            this.throwBottle.forEach((bottle) =>{   
+            
+                if (enemy.isColliding(bottle) && !enemy.isHurt() && !enemy.isDead()) {
+                    console.log('bottle hit enenmy');
+                    enemy.hit();
+                }
         })
+    }) 
     }
 
     checkThrowableobject(){
         if(this.keyboard.space && (new Date().getTime() - this.character.lastthrow > 500)  && this.character.bottleAmount > 0 ){
             this.character.lastthrow = new Date().getTime();
-            let bottles = new Throwableobject(this.character.x, this.character.y);
+            let bottles = new Throwableobject(this.character.x + 100, this.character.y + 100);
             this.throwBottle.push(bottles);          
             this.statusbarbottle.setPercent(this.character.bottleAmount -= 10);
-        }else if(this.throwBottle.y == 720){
-            this.throwBottle =[];
         }
+        
+        //if(this.throwBottle.y > 720){
+            //console.log('bottle deleted');
+            //let pos = this.throwBottle.indexOf(bottles);
+            //this.bottles.splice(pos, 1);
+        //}
     }
 
     setWorld(){
@@ -127,14 +125,14 @@ class World{
         this.addToMap(this.character); 
         this.addObjectToMap(this.level.coin);
         this.addObjectToMap(this.level.enemies);
-        this.addObjectToMap(this.level.endboss);
-        this.ctx.translate(-this.camera_x, 0);
-        
         this.addObjectToMap(this.throwBottle);
+        this.ctx.translate(-this.camera_x, 0);
+     
         this.addToMap(this.statusbar);
         this.addToMap(this.statusbarcoin);
         this.addToMap(this.statusbarbottle);
         this.addToMap(this.statusbarboss);
+        
        
         if(this.character.isDead()){
             this.addToMap(this.game_over);

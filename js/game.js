@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let allIntervals = [];
+
 
  function init(){
     canvas = document.getElementById('canvas');
@@ -13,16 +13,7 @@ function fullscreen(){
 }
 
 function restartGame(){
-    let interval = setInterval(() => {
-        
-    }, 100);
-    
-    allIntervals.push(interval);
-    
-    allIntervals.forEach(interval => clearInterval);
-    
-    let animationFrame = requestAnimationFrame(world.draw);
-    cancelAnimationFrame(animationFrame);
+    window.canvas.clearInterval();
 }
 
 function startGame(){

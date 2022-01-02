@@ -71,7 +71,6 @@ class World{
     checkcollisionWithCoin(){    
         this.level.coin.forEach((coins) =>{
             if(this.character.isColliding(coins)) {
-                console.log(this.character.coinAmount);
                 this.character.hitCoin(); 
                 this.collect_coin.play();                
                 this.statusbarcoin.setPercent(this.character.coinAmount); 
@@ -85,7 +84,6 @@ class World{
     checkcollisionWithBottle(){
         this.level.bottle.forEach((bottles) =>{
             if(this.character.isColliding(bottles)) {
-                console.log(this.character.bottleAmount);
                 this.character.hitBottle();   
                 this.collect_bottle.play();     
                 this.statusbarbottle.setPercent(this.character.bottleAmount); 
@@ -103,14 +101,14 @@ class World{
                     enemy.hitChickens();
                 }
         })
-
+        
         if (enemy.isDead()) {
             setTimeout(() => {
                 let index = this.level.enemies.indexOf(enemy);
                 this.level.enemies.splice(index, 1);
             }, 1000);
-        }
-    }) 
+        }          
+    })  
     }
 
 
@@ -119,7 +117,8 @@ class World{
             this.throwBottle.forEach((bottle) =>{   
                 if (boss.isColliding(bottle) && !boss.isHurt() && !boss.isDead()) {
                     boss.hit();
-                    this.statusbarboss.setPercent(this.character.energy);
+                    console.log(this.endboss.energy);
+                    this.statusbarboss.setPercent(this.endboss.energy);
                 }
         })
 
@@ -178,7 +177,7 @@ class World{
         
         if(this.endboss.isDead()){
             this.addToMap(this.you_won);
-        }
+        }else 
        
         if(this.character.isDead()){
             this.addToMap(this.game_over);
@@ -220,7 +219,7 @@ class World{
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
     }
-    
+
 
     flipImageBack(mo){
         this.ctx.restore();

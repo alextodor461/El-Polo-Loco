@@ -3,10 +3,10 @@ class Wongame extends MovableObject{
     width = 720;
     x;
     y;
-    win = 'img/9.Intro _ Outro Image/_Game over_ screen/3.Game over.png';
+    win_game = 'img/9.Intro _ Outro Image/_Game over_ screen/3.Game over.png';
   
     constructor(){
-        super().loadImage(this.win);
+        super().loadImage(this.win_game);
         this.height;
         this.width;
         this.x = 0;

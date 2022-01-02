@@ -34,13 +34,13 @@ class Endbossbar extends Drawableobject{
     resolverImageIndex(){
         if(this.percent == 100){
             return 0;
-        }else if(this.percent < 80){
+        }else if(this.percent > 80){
             return 1;
-        }else if(this.percent < 60){
+        }else if(this.percent > 60){
             return 2;
-        }else if(this.percent < 40){
+        }else if(this.percent > 40){
             return 3;
-        }else if(this.percent < 20){
+        }else if(this.percent > 20){
             return 4;
         }else{
             return 5;

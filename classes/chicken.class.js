@@ -18,24 +18,25 @@ class Chicken extends MovableObject{
        this.loadImages(this.IMAGES_WALKING);
        this.loadImages(this.IMAGES_DEAD);
        this.x = 700 + Math.random() * 3000; //Zahl zwischen 200 und 700. Math.random gibt eine zufällige zahl zwischen 0-1. Mit *500 wird es umgewandelt
-       this.speed = 0.15 + Math.random() * 0.20; //Die Hünchen bewegen sich zufällig schnell.
+       this.speed = 0.2 + Math.random() * 0.5; //Die Hünchen bewegen sich zufällig schnell.
        this.animates();
     } 
 
     animates(){
-        setInterval(() => {
-            if(this.isDead()){
-                console.log('chicken dead');
-                this.loadImage(this.IMAGES_DEAD);
-            }else if(this.isHurt()){    
-                console.log('ENEMY HIIIITTTT');             
+        setInterval(() =>{
+            if (!this.isDead()) {
+                this.moveLeft();
             }
-        },100);   
+        }, 1000 / 120);
+        
+        setInterval(() => { //um function animate haüfig zu ausführen 
+         if (this.isDead()) {
+             this.playAnimation(this.IMAGES_DEAD);
 
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);      
-        }, 100);  
-        this.moveLeft();
+         }else{
+             this.playAnimation(this.IMAGES_WALKING);
+         }
+        }, 200); // jede 200 millisekunde ändert sich das bild 
     }
 }
 

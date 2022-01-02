@@ -7,6 +7,7 @@ class World{
     statusbarcoin = new StatusbarCoin();
     statusbarbottle = new StatusbarBottle();
     statusbarboss = new Endbossbar();
+    statusbarboss_icon = new EndbossbarIcon();
     throwBottle = [];
     level = level1;
     canvas;
@@ -99,33 +100,31 @@ class World{
             this.throwBottle.forEach((bottle) =>{         
                 if (enemy.isColliding(bottle) && !enemy.isHurt() && !enemy.isDead()) {
                     enemy.hitChickens();
+
+                    if (enemy.isDead()) {
+                        setTimeout(() => {
+                            let index = this.level.enemies.indexOf(enemy);
+                            this.level.enemies.splice(index, 1);
+                        }, 1000);
+                    }        
                 }
-        })
-        
-        if (enemy.isDead()) {
-            setTimeout(() => {
-                let index = this.level.enemies.indexOf(enemy);
-                this.level.enemies.splice(index, 1);
-            }, 1000);
-        }          
+        })    
     })  
     }
 
 
     hurtBoss(){
-        this.level.endboss.forEach((boss) =>{  
-            this.throwBottle.forEach((bottle) =>{   
-                if (boss.isColliding(bottle) && !boss.isHurt() && !boss.isDead()) {
-                    boss.hit();
-                    console.log(this.endboss.energy);
-                    this.statusbarboss.setPercent(this.endboss.energy);
-                }
-        })
-
-        if (boss.isDead()) {
+      this.throwBottle.forEach((bottle) =>{          
+        if (this.endboss.isColliding(bottle) && !this.endboss.isHurt() && !this.endboss.isDead()) {
+            this.endboss.hit();
+            console.log(this.endboss.energy);
+            this.statusbarboss.setPercent(this.endboss.energy);
+         }
+    
+        if (this.endboss.isDead()) {
             setTimeout(() => {
-                let index = this.level.endboss.indexOf(boss);
-                this.level.endboss.splice(index, 1);
+                
+                console.log('delete');
             }, 1500);
         }
     }) 
@@ -166,7 +165,7 @@ class World{
         this.addToMap(this.character); 
         this.addObjectToMap(this.level.coin);
         this.addObjectToMap(this.level.enemies);
-        this.addObjectToMap(this.level.endboss);
+        this.addToMap(this.endboss); 
         this.addObjectToMap(this.throwBottle);
         this.ctx.translate(-this.camera_x, 0);
     
@@ -174,10 +173,11 @@ class World{
         this.addToMap(this.statusbarcoin);
         this.addToMap(this.statusbarbottle);
         this.addToMap(this.statusbarboss);
+        this.addToMap(this.statusbarboss_icon);
         
         if(this.endboss.isDead()){
             this.addToMap(this.you_won);
-        }else 
+        }
        
         if(this.character.isDead()){
             this.addToMap(this.game_over);

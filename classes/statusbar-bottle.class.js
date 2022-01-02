@@ -4,7 +4,6 @@ class StatusbarBottle extends Drawableobject{
     height = 20;
     width = 100;
     world;
-
     percent = 100;
 
     IMAGES_BOTTLE = [

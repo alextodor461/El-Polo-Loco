@@ -3,7 +3,6 @@ class Statusbar extends Drawableobject{
     x = 1000;
     height = 20;
     width = 100;
-
     percent = 100;
 
     IMAGES_LIVE = [

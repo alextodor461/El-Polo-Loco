@@ -25,10 +25,9 @@ class Chicken extends MovableObject{
     animates(){
         setInterval(() => {
             if(this.isDead()){
+                console.log('chicken dead');
                 this.loadImage(this.IMAGES_DEAD);
-                console.log('endboss is dead'); 
-            }else if(this.isHurt()){
-                
+            }else if(this.isHurt()){    
                 console.log('ENEMY HIIIITTTT');             
             }
         },100);   

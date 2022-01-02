@@ -18,7 +18,7 @@ class World{
     hit_chicken = new Audio('audio/pepe-hurt.mp3');
     hit_chicken_with_bottle = new Audio('audio/chicken.mp3');
     game_over = new Gameover();
-    you_won = new WonGame();
+    you_won = new Wongame();
     dead_chicken = "img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png";
 
     constructor(canvas, keyboard){
@@ -30,17 +30,19 @@ class World{
         this.setWorld();   
     }
 
+
     run(){
         setInterval(() => { 
             this.checkcollision();
             this.checkThrowableobject();
             this.checkcollisionWithCoin();
             this.checkcollisionWithBottle();        
-            
-            this.checkcollisionWithEnemy();
-           
+            this.checkcollisionWithBoss();
+            this.hurtChickens();   
+            this.hurtBoss();  
         }, 10);       
     }
+
 
     checkcollision(){
         this.level.enemies.forEach((enemy) =>{
@@ -52,6 +54,19 @@ class World{
             }
          })
     }
+
+
+    checkcollisionWithBoss(){
+        this.level.endboss.forEach((enemy) =>{
+            if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
+                this.character.hitByBoss();   
+                this.hit_chicken.play();
+                this.statusbarcoin.setPercent(this.character.coinAmount -= 10);
+                this.statusbar.setPercent(this.character.energy); 
+            }
+         })
+    }
+
 
     checkcollisionWithCoin(){    
         this.level.coin.forEach((coins) =>{
@@ -66,6 +81,7 @@ class World{
          })
     }
 
+
     checkcollisionWithBottle(){
         this.level.bottle.forEach((bottles) =>{
             if(this.character.isColliding(bottles)) {
@@ -79,18 +95,43 @@ class World{
          })
     }
  
-    //auf diese funktion will ich im chicken class drauf greifen
-    checkcollisionWithEnemy(){
+
+    hurtChickens(){
         this.level.enemies.forEach((enemy) =>{  
-            this.throwBottle.forEach((bottle) =>{   
-            
+            this.throwBottle.forEach((bottle) =>{         
                 if (enemy.isColliding(bottle) && !enemy.isHurt() && !enemy.isDead()) {
-                    console.log('bottle hit enenmy');
-                    enemy.hit();
+                    enemy.hitChickens();
                 }
         })
+
+        if (enemy.isDead()) {
+            setTimeout(() => {
+                let index = this.level.enemies.indexOf(enemy);
+                this.level.enemies.splice(index, 1);
+            }, 1000);
+        }
     }) 
     }
+
+
+    hurtBoss(){
+        this.level.endboss.forEach((boss) =>{  
+            this.throwBottle.forEach((bottle) =>{   
+                if (boss.isColliding(bottle) && !boss.isHurt() && !boss.isDead()) {
+                    boss.hit();
+                    this.statusbarboss.setPercent(this.character.energy);
+                }
+        })
+
+        if (boss.isDead()) {
+            setTimeout(() => {
+                let index = this.level.endboss.indexOf(boss);
+                this.level.endboss.splice(index, 1);
+            }, 1500);
+        }
+    }) 
+    }
+
 
     checkThrowableobject(){
         if(this.keyboard.space && (new Date().getTime() - this.character.lastthrow > 500)  && this.character.bottleAmount > 0 ){
@@ -107,10 +148,11 @@ class World{
         //}
     }
 
+
     setWorld(){
         this.character.world = this;
-        this.enemies.world = this;
     }
+
 
     draw(){
         this.wind;
@@ -125,23 +167,23 @@ class World{
         this.addToMap(this.character); 
         this.addObjectToMap(this.level.coin);
         this.addObjectToMap(this.level.enemies);
+        this.addObjectToMap(this.level.endboss);
         this.addObjectToMap(this.throwBottle);
         this.ctx.translate(-this.camera_x, 0);
-     
+    
         this.addToMap(this.statusbar);
         this.addToMap(this.statusbarcoin);
         this.addToMap(this.statusbarbottle);
         this.addToMap(this.statusbarboss);
         
+        if(this.endboss.isDead()){
+            this.addToMap(this.you_won);
+        }
        
         if(this.character.isDead()){
             this.addToMap(this.game_over);
         }
 
-        if(this.endboss.isDead()){
-            this.addToMap(this.you_won);
-        }
-        
         //Draw wird immer wieder aufgerufen und zeigt jede veränderung z.b wenn sich die objekte bewegen
         self = this;
         requestAnimationFrame(function(){
@@ -149,11 +191,13 @@ class World{
         });     
     }
 
+
     addObjectToMap(object){
         object.forEach(o => {
             this.addToMap(o);
         });
     };
+
 
     addToMap(mo){
         if(mo.otherDirection){
@@ -169,12 +213,14 @@ class World{
         }
     }
 
+
     flipImage(mo){
         this.ctx.save();
             this.ctx.translate(mo.width, 0);
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
     }
+    
 
     flipImageBack(mo){
         this.ctx.restore();

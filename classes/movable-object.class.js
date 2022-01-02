@@ -83,7 +83,16 @@ class MovableObject extends Drawableobject{
     }
 
     hit(){
-        this.energy -= 30;
+        this.energy -= 20;
+        if(this.energy < 0){
+            this.energy = 0;
+        }else{
+            this.lasthit = new Date().getTime();
+        }
+    }
+
+    hitChickens(){
+        this.energy -= 100;
         if(this.energy < 0){
             this.energy = 0;
         }else{

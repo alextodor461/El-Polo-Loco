@@ -13,7 +13,8 @@ function fullscreen(){
 }
 
 function restartGame(){
-    window.canvas.clearInterval();
+    location.reload();
+    return false;
 }
 
 function startGame(){

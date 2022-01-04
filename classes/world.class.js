@@ -122,10 +122,7 @@ class World{
          }
     
         if (this.endboss.isDead()) {
-            setTimeout(() => {
-                
-                console.log('delete');
-            }, 1500);
+            
         }
     }) 
     }

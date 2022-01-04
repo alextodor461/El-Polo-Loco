@@ -28,6 +28,13 @@ class MovableObject extends Drawableobject{
         }, 35);
     }
 
+    fallBoss(){   
+        setInterval(() => {    
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration_fall;    
+        }, 300);       
+    }
+    
     //Die Function wird in der IF-afrage eingesetzt, siehe über diese Function
     isAboveGround(){
         if(this instanceof Throwableobject){

@@ -39,13 +39,23 @@ class Endboss extends MovableObject{
         setInterval(() => {
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
+                this.fallBoss();
+                window.addEventListener('keydown', (e) =>{
+                    if(e.keyCode == 39){
+                        keyboard.right = false;
+                    }
+                
+                    if(e.keyCode == 37){
+                        keyboard.left = false;
+                    }        
+                });  
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);             
             }
-        },100);   
+        },125);   
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);      
-        }, 700);  
+        }, 500);  
     }
 }

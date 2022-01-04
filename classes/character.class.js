@@ -79,9 +79,18 @@ class Character extends MovableObject{
 
 
             setInterval(() => {
-                
+               
             if(this.isDead()){
-                this.playAnimation(this.IMAGES_DEAD);     
+                this.playAnimation(this.IMAGES_DEAD);   
+                window.addEventListener('keydown', (e) =>{
+                    if(e.keyCode == 39){
+                        keyboard.right = false;
+                    }
+                
+                    if(e.keyCode == 37){
+                        keyboard.left = false;
+                    }        
+                });  
                 this.fall();
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);              

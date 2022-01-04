@@ -42,13 +42,19 @@
     </canvas>
 
     <div class="restart-newgame-div">
-        <button class="fullscreen-btn" onclick="fullscreen()">Fullscreen</button>
-        <button class="restart-btn" onclick="restartGame()">restart</button>
+        <button onclick="fullscreen()">Fullscreen</button>
+        <button onclick="restartGame()">restart</button>
+        <button onclick="showInstructions()">How works the Game ?</button>
     </div>
 
     <div id="startGameDiv" class="start-game-div">
         <img class="start-img" src="img/9.Intro _ Outro Image/Start Screen/Opciขn 1.png" alt="">
         <button onclick="startGame()">Start</button>
+    </div>
+
+    <div id="instructions" class="instructions-div">
+        <img src="img/instructions.png" alt="">
+        <button onclick="closeInstructions()">close</button>
     </div>
 </main>
 

@@ -17,9 +17,16 @@ function restartGame(){
     return false;
 }
 
+function showInstructions(){
+    document.getElementById('instructions').classList.add('show-instructions');
+}
+
+function closeInstructions(){
+    document.getElementById('instructions').classList.remove('show-instructions');
+}
+
 function startGame(){
     document.getElementById('startGameDiv').classList.add('d-none');
-    
 }
 
 window.addEventListener('keydown', (e) =>{

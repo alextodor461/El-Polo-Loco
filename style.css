@@ -58,8 +58,8 @@ main{
     font-size: 15px;
     background-color: rgb(12, 117, 255);
     color: white;
-    width: 100px;
-    padding: 10px;
+  
+    padding: 10px 20px;
     cursor: pointer;
     margin-left: 20px;
     margin-right: 20px;
@@ -67,6 +67,44 @@ main{
 }
 
 .restart-newgame-div button:hover{
+    background-color: rgb(0, 71, 163);
+}
+
+.instructions-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    transform: translateY(-100rem);
+    transition: 500ms ease;
+}
+
+.show-instructions{
+    transform: translateY(0);
+}
+
+.instructions-div img{
+    width: 45%;
+    border-radius: 20px;
+}
+
+.instructions-div button{
+    margin-top: 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: rgb(12, 117, 255);
+    color: white;
+}
+
+.instructions-div button:hover{
     background-color: rgb(0, 71, 163);
 }
 

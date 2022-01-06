@@ -86,7 +86,7 @@ class Character extends MovableObject{
                     if(e.keyCode == 39){
                         keyboard.right = false;
                     }
-                
+               
                     if(e.keyCode == 37){
                         keyboard.left = false;
                     }        

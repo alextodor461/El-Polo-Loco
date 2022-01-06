@@ -121,6 +121,13 @@ class MovableObject extends Drawableobject{
         }
     }
 
+    hitHeart(){
+        this.energy += 10;
+        if(this.energy > 100){
+            this.energy = 100;
+        }
+    }
+
     hitBottle(){
         this.bottleAmount += 10;
         if(this.bottleAmount > 100){

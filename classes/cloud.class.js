@@ -6,7 +6,7 @@ class Cloud extends MovableObject{
         this.width = 500;
         this.height = 300;
 
-        this.x = 100 + Math.random() * 2000; //Zahl zwischen 200 und 700. Math.random gibt eine zufällige zahl zwischen 0-1. Mit *500 wird es umgewandelt
+        this.x = 300 + Math.random() * 5000; //Zahl zwischen 200 und 700. Math.random gibt eine zufällige zahl zwischen 0-1. Mit *500 wird es umgewandelt
         this.animate();
     } 
 

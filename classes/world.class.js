@@ -17,7 +17,8 @@ class World{
     collect_coin = new Audio('audio/collect-coin.mp3');
     collect_bottle = new Audio('audio/collect-bottle.mp3');
     hit_chicken = new Audio('audio/pepe-hurt.mp3');
-    hit_chicken_with_bottle = new Audio('audio/chicken.mp3');
+    hit_chicken_with_bottle = new Audio('audio/hit-chicken.mp3');
+    win_music= new Audio('audio/win-musik.mp3');
     game_over = new Gameover();
     you_won = new Wongame();
     dead_chicken = "img/3.Secuencias_Enemy_b sico/Versi¢n_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png";
@@ -37,6 +38,7 @@ class World{
             this.checkcollision();
             this.checkThrowableobject();
             this.checkcollisionWithCoin();
+            this.checkcollisionWithHeart();
             this.checkcollisionWithBottle();        
             this.checkcollisionWithBoss();
             this.hurtChickens();   
@@ -82,6 +84,18 @@ class World{
     }
 
 
+    checkcollisionWithHeart(){    
+        this.level.heart.forEach((hearts) =>{
+            if(this.character.isColliding(hearts)) {
+                this.character.hitHeart();                
+                this.statusbar.setPercent(this.character.energy); 
+                let pos = this.level.heart.indexOf(hearts);
+                this.level.heart.splice(pos, 1);
+            }
+         })
+    }
+
+
     checkcollisionWithBottle(){
         this.level.bottle.forEach((bottles) =>{
             if(this.character.isColliding(bottles)) {
@@ -119,10 +133,11 @@ class World{
             this.endboss.hit();
             console.log(this.endboss.energy);
             this.statusbarboss.setPercent(this.endboss.energy);
+            this.hit_chicken_with_bottle.play();
          }
     
         if (this.endboss.isDead()) {
-            
+            this.win_music.play();
         }
     }) 
     }
@@ -161,6 +176,7 @@ class World{
         this.addObjectToMap(this.level.bottle);
         this.addToMap(this.character); 
         this.addObjectToMap(this.level.coin);
+        this.addObjectToMap(this.level.heart);
         this.addObjectToMap(this.level.enemies);
         this.addToMap(this.endboss); 
         this.addObjectToMap(this.throwBottle);

@@ -31,7 +31,7 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_WALKING); //DIE FUNKTION AUS DER WORLD.JS DATEI WIRD HIER GELADEN MIT DEN BILDERN
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 3600;
+        this.x = 7000;
         this.animateBoss();
     }
 

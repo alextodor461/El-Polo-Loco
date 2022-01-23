@@ -99,12 +99,15 @@ class World{
 
     checkcollisionWithBottle(){
         this.level.bottle.forEach((bottles) =>{
-            if(this.character.isColliding(bottles)) {
+            if(this.character.isColliding(bottles) && this.statusbarbottle.percent < 100) {
                 this.character.hitBottle();   
                 this.collect_bottle.play();     
                 this.statusbarbottle.setPercent(this.character.bottleAmount); 
                 let pos = this.level.bottle.indexOf(bottles);
                 this.level.bottle.splice(pos, 1);
+                console.log(this.statusbarbottle.percent);
+            }else{
+                this.isColliding = false;
             }
          })
     }
@@ -149,7 +152,8 @@ class World{
             this.character.lastthrow = new Date().getTime();
             let bottles = new Throwableobject(this.character.x + 100, this.character.y + 100);
             this.throwBottle.push(bottles);          
-            this.statusbarbottle.setPercent(this.character.bottleAmount -= 10);
+            this.statusbarbottle.setPercent(this.character.bottleAmount -= 20);
+            console.log(this.statusbarbottle.percent);
         }
         
         //if(this.throwBottle.y > 720){

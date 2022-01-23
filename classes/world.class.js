@@ -43,7 +43,8 @@ class World{
             this.checkcollisionWithBoss();
             this.hurtChickens();   
             this.hurtBoss();  
-        }, 10);       
+        }, 10);  
+            
     }
 
 

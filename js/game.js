@@ -6,6 +6,8 @@ let keyboard = new Keyboard();
  function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    document.getElementById('startGameDiv').classList.add('d-none');
+    startIntervals();
 }
 
 function fullscreen(){
@@ -25,8 +27,10 @@ function closeInstructions(){
     document.getElementById('instructions').classList.remove('show-instructions');
 }
 
-function startGame(){
-    document.getElementById('startGameDiv').classList.add('d-none');
+function startIntervals(){
+    world.setWorld();
+    world.draw();
+    world.run();
 }
 
 window.addEventListener('keydown', (e) =>{

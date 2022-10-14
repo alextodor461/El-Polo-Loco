@@ -3,7 +3,7 @@ class Endboss extends MovableObject{
     width = 350;
     y = 10;
 
-    IMAGES_WALKING =[
+    IMAGES_STAYING =[
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/2.Ateciขn-ataque/1.Alerta/G5.png',
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/2.Ateciขn-ataque/1.Alerta/G6.png',
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/2.Ateciขn-ataque/1.Alerta/G7.png',
@@ -20,6 +20,13 @@ class Endboss extends MovableObject{
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/3.Herida/G23.png',
     ];
 
+    IMAGES_ATTACK = [
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G1.png',
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G2.png',
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G3.png',
+        'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/1.Caminata/G4.png',
+    ];
+
     IMAGES_DEAD = [
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G24.png',
         'img/4.Secuencias_Enemy_gigantขn-Doคa_Gallinota-/4.Muerte/G25.png',
@@ -27,14 +34,17 @@ class Endboss extends MovableObject{
     ];
 
     constructor(){
-        super().loadImage(this.IMAGES_WALKING[0]); //DAS ERSTE BILD ALSO AND DER STELLE 0
-        this.loadImages(this.IMAGES_WALKING); //DIE FUNKTION AUS DER WORLD.JS DATEI WIRD HIER GELADEN MIT DEN BILDERN
+        super().loadImage(this.IMAGES_STAYING[0]); 
+        this.loadImages(this.IMAGES_STAYING); //The function from world.js loads the images 
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_ATTACK);
         this.x = 7000;
+        this.y = this.y;
         this.animateBoss();
     }
 
+    //This function animates the Boss at the end of the game
     animateBoss(){
         setInterval(() => {
             if(this.isDead()){
@@ -49,13 +59,14 @@ class Endboss extends MovableObject{
                         keyboard.left = false;
                     }        
                 });  
-            }else if(this.isHurt()){
-                this.playAnimation(this.IMAGES_HURT);             
-            }
-        },125);   
 
+            }else if(this.isHurt()){
+                this.playAnimation(this.IMAGES_HURT);   
+            }           
+        },200);
+       
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);      
-        }, 500);  
+            this.playAnimation(this.IMAGES_STAYING);      
+        }, 300);  
     }
 }

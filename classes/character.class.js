@@ -96,13 +96,11 @@ class Character extends MovableObject{
                 this.playAnimation(this.IMAGES_HURT);              
             }else if(this.isAboveGround()){
                 this.playAnimation(this.IMAGES_JUMPING);
-            }else{
-
-            if(this.world.keyboard.right || this.world.keyboard.left){ //Wenn key rechts down oder key links down // || = ODER
+            }else
+                  if(this.world.keyboard.right || this.world.keyboard.left){ //Wenn key rechts down oder key links down // || = ODER
                     this.playAnimation(this.IMAGES_WALKING);
-                   
-            }   
-            }               
+                  }
+                          
         },90); 
     }
 }

@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 
 
- function init(){
+function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('startGameDiv').classList.add('d-none');
@@ -12,6 +12,7 @@ let keyboard = new Keyboard();
 
 function fullscreen(){
     canvas.requestFullscreen();
+    document.getElementById('canvas').classList.add('borderless'); 
 }
 
 function restartGame(){

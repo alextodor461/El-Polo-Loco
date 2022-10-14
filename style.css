@@ -1,3 +1,7 @@
+body{
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(37, 37, 37);
+}
 
 *{
     margin: 0;
@@ -8,6 +12,7 @@ main{
     flex-direction: column;
     align-items: center;
 }
+
 
 .starterscreen{
     z-index: 1000;
@@ -20,7 +25,7 @@ main{
 
 .start-game-div{
     position: absolute;
-    top: 100;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
@@ -34,13 +39,13 @@ main{
     height: 5vh;
     border: none;
     font-size: 25px;
-    background-color: rgb(12, 117, 255);
+    background-color: orange;
     color: white;
     cursor: pointer;
 }
 
 .start-game-div button:hover{
-    background-color: rgb(0, 71, 163);
+    background-color: rgb(255, 136, 0);
 }
 
 .start-img{
@@ -56,9 +61,9 @@ main{
 .restart-newgame-div button{
     border: none;
     font-size: 15px;
-    background-color: rgb(12, 117, 255);
+    background-color: transparent;
+    border: 1px solid orange;
     color: white;
-  
     padding: 10px 20px;
     cursor: pointer;
     margin-left: 20px;
@@ -67,7 +72,7 @@ main{
 }
 
 .restart-newgame-div button:hover{
-    background-color: rgb(0, 71, 163);
+    background-color: rgb(255, 136, 0);
 }
 
 .instructions-div{
@@ -100,12 +105,7 @@ main{
     font-size: 20px;
     padding: 10px 30px;
     cursor: pointer;
-    background-color: rgb(12, 117, 255);
     color: white;
-}
-
-.instructions-div button:hover{
-    background-color: rgb(0, 71, 163);
 }
 
 .d-none{
@@ -114,6 +114,30 @@ main{
 
 canvas{
     display: block;
+    border-radius: 10px;
+    border: 2px solid orange;
+}
+
+.background-img{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(30%) blur(5px);
+}
+
+.title-svg{
+    width: 10%;
+    margin: 50px 0px;
+}
+
+.borderless{
+    border: none;
 }
 
 @media screen and ( max-width: 720px ) {

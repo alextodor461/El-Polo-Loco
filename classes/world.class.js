@@ -35,7 +35,7 @@ class World{
 
     run(){
         setInterval(() => { 
-            this.checkcollision();
+            this.checkcollisionWithChicken();
             this.checkThrowableobject();
             this.checkcollisionWithCoin();
             this.checkcollisionWithHeart();
@@ -48,9 +48,9 @@ class World{
     }
 
 
-    checkcollision(){
+    checkcollisionWithChicken(){
         this.level.enemies.forEach((enemy) =>{
-            if(this.character.isColliding(enemy) && !this.character.isHurt() && !this.character.isDead()) {
+            if(this.character.isCollidingChickenCoins(enemy) && !this.character.isHurt() && !this.character.isDead()) {
                 this.character.hit();   
                 this.hit_chicken.play();
                 this.statusbarcoin.setPercent(this.character.coinAmount -= 10);
@@ -74,7 +74,7 @@ class World{
 
     checkcollisionWithCoin(){    
         this.level.coin.forEach((coins) =>{
-            if(this.character.isColliding(coins)) {
+            if(this.character.isCollidingChickenCoins(coins)) {
                 this.character.hitCoin(); 
                 this.collect_coin.play();                
                 this.statusbarcoin.setPercent(this.character.coinAmount); 
@@ -87,7 +87,7 @@ class World{
 
     checkcollisionWithHeart(){    
         this.level.heart.forEach((hearts) =>{
-            if(this.character.isColliding(hearts)) {
+            if(this.character.isColliding(hearts) && this.statusbar.percent < 100) {
                 this.character.hitHeart();                
                 this.statusbar.setPercent(this.character.energy); 
                 let pos = this.level.heart.indexOf(hearts);
@@ -106,12 +106,10 @@ class World{
                 let pos = this.level.bottle.indexOf(bottles);
                 this.level.bottle.splice(pos, 1);
                 console.log(this.statusbarbottle.percent);
-            }else{
-                this.isColliding = false;
             }
          })
     }
- 
+
 
     hurtChickens(){
         this.level.enemies.forEach((enemy) =>{  
@@ -134,7 +132,7 @@ class World{
     hurtBoss(){
       this.throwBottle.forEach((bottle) =>{          
         if (this.endboss.isColliding(bottle) && !this.endboss.isHurt() && !this.endboss.isDead()) {
-            this.endboss.hit();
+            this.endboss.hitBoss();
             console.log(this.endboss.energy);
             this.statusbarboss.setPercent(this.endboss.energy);
             this.hit_chicken_with_bottle.play();
@@ -153,17 +151,11 @@ class World{
             let bottles = new Throwableobject(this.character.x + 100, this.character.y + 100);
             this.throwBottle.push(bottles);          
             this.statusbarbottle.setPercent(this.character.bottleAmount -= 20);
-            console.log(this.statusbarbottle.percent);
+            console.log(this.statusbarbottle.percent -= 20);
         }
-        
-        //if(this.throwBottle.y > 720){
-            //console.log('bottle deleted');
-            //let pos = this.throwBottle.indexOf(bottles);
-            //this.bottles.splice(pos, 1);
-        //}
     }
 
-
+    
     setWorld(){
         this.character.world = this;
     }

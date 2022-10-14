@@ -34,13 +34,13 @@ class StatusbarBottle extends Drawableobject{
     resolverImageIndex(){
         if(this.percent == 0){
             return 5;
-        }else if(this.percent < 20){
+        }else if(this.percent == 20){
             return 4;
-        }else if(this.percent < 40){
+        }else if(this.percent == 40){
             return 3;
-        }else if(this.percent < 60){
+        }else if(this.percent == 60){
             return 2;
-        }else if(this.percent < 80){
+        }else if(this.percent == 80){
             return 1;
         }else{
             return 0;

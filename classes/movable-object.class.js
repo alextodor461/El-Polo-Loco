@@ -3,10 +3,13 @@
 class MovableObject extends Drawableobject{
 
     speed = 0.15;
+    speedBoss = 1;
     otherDirection = false;
     speedY = 0;
+    speedX = 0;
     acceleration = 2;
     acceleration_fall = 3;
+    accelerationXboss = -3;
     energy = 100;
     coinAmount = 0;
     bottleAmount = 0;
@@ -19,6 +22,13 @@ class MovableObject extends Drawableobject{
             this.speedY -= this.acceleration;
             }
         }, 35);
+    }
+
+    applyGravityBoss(){
+        if(this.isAboveGroundBoss()){
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        }  
     }
 
     fall(){
@@ -40,7 +50,15 @@ class MovableObject extends Drawableobject{
         if(this instanceof Throwableobject){
             return true;
         }else{
-            return this.y < 120;
+            return this.y < 140;
+        } 
+    }
+
+    isAboveGroundBoss(){
+        if(this instanceof Endboss){
+            return true;
+        }else{
+            return this.y < 100;
         } 
     }
 
@@ -48,7 +66,14 @@ class MovableObject extends Drawableobject{
         return this.x + this.width > mo.x &&
         this.y + this.height > mo.y &&
         this.x < mo.x &&
-        this.y < mo.y + mo.height
+        this.y < mo.y + mo.height;
+    }
+
+    isCollidingChickenCoins(mo){
+        return this.x + this.width - 65 > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height;
     }
 
     moveRight(){
@@ -70,7 +95,7 @@ class MovableObject extends Drawableobject{
      }
 
     moveLeft(){
-            this.x -= this.speed;   
+        this.x -= this.speed;   
     }
 
     jump(){
@@ -89,6 +114,15 @@ class MovableObject extends Drawableobject{
 
     hit(){
         this.energy -= 10;
+        if(this.energy < 0){
+            this.energy = 0;
+        }else{
+            this.lasthit = new Date().getTime();
+        }
+    }
+
+    hitBoss(){
+        this.energy -= 20;
         if(this.energy < 0){
             this.energy = 0;
         }else{
@@ -129,7 +163,7 @@ class MovableObject extends Drawableobject{
     }
 
     hitBottle(){
-        this.bottleAmount += 10;
+        this.bottleAmount += 20;
         if(this.bottleAmount > 100){
             this.bottleAmount = 100;
         }
